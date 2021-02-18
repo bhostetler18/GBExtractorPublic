@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# GarageBand MIDI extractor gbextractor v2.5 18th Feb 2021
+# GarageBand MIDI extractor gbextractor v2.5.1 18th Feb 2021
 # Copyright (C) 2020, 2021 MisplacedDevelopment 
 # See LICENSE for license information (Apache 2)
 
@@ -59,7 +59,7 @@ maxPerms = 24
 # then there may be MIDI artefacts in the output.  These appear as
 # very low velocity and/or low duration notes.  Use these parameters
 # to filter notes based on their velocity or duration
-bFilterNotes = True
+bFilterNotes = False
 # Max and min velocity
 velocityMin = 20
 velocityMax = 127
@@ -68,7 +68,7 @@ durationMin = 40
 
 ## Audio ##
 # Enable this option to extract audio files stored in the project
-bExtractAudio = True
+bExtractAudio = False
 # Enable this option to create a zipped version of the audio that is extracted
 bCompressAudio = True
 
@@ -152,10 +152,10 @@ trackMap = {35:'Kick',
 ## Debugging ##
 
 # Turn debugging on or off
-bDebug = True
+bDebug = False
 # Choose whether to redirect stdout to a log file.  You would normally want to do this
 # on iOS
-bWriteToFile = True
+bWriteToFile = False
 # If this is set then the whole binary is dumped as hex text at the end of processing
 bDumpFile = False
 
@@ -833,7 +833,7 @@ def processOffsetList(s):
       for i in range(0, 100):
         thisByte = s.read("uintle:8")
         if(thisByte == 0x20):
-          dumphex(45, s)
+          if bDebug: dumphex(45, s)
           s.read("bytes:39")
           sectionLength = s.read("uintle:24")
           s.read("bytes:161")
